@@ -234,9 +234,8 @@ GameObject:
   - component: {fileID: 5298910524942982609}
   - component: {fileID: 2999841292249247922}
   - component: {fileID: 7639476880256231355}
-  - component: {fileID: 1180467936546941643}
-  - component: {fileID: 5438556181238905110}
   - component: {fileID: 5438556181238905111}
+  - component: {fileID: 273101849}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -305,36 +304,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &1180467936546941643
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5438556181238905109}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &5438556181238905110
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5438556181238905109}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 80
-  m_CollisionDetection: 0
 --- !u!114 &5438556181238905111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +317,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 15
+--- !u!143 &273101849
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438556181238905109}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6631336514885881229
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +345,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4036044373866596679}
   - component: {fileID: 6631336514885881230}
+  - component: {fileID: 6631336514885881232}
   m_Layer: 8
   m_Name: WeaponHolder
   m_TagString: Untagged
@@ -399,6 +387,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &6631336514885881232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6631336514885881229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a420a0bea2f66df49a79640a9f7973a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomButton: Fire2
+  scopeAnimationBool: isScoped
+  scopeDelay: 0.15
+  scopeOverlay: {fileID: 0}
 --- !u!1001 &1988495580557984864
 PrefabInstance:
   m_ObjectHideFlags: 0
