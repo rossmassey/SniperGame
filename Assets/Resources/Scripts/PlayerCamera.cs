@@ -28,7 +28,7 @@ public class PlayerCamera : MonoBehaviour
 
     void Update()
     {
-        CalculatMouseLook();
+        CalculateMouseLook();
         ApplyTransforms();
     }
 
@@ -40,7 +40,7 @@ public class PlayerCamera : MonoBehaviour
         playerTransform.localRotation = Quaternion.AngleAxis(mouseLook.x, playerTransform.up);
     }
 
-    private void CalculatMouseLook()
+    private void CalculateMouseLook()
     {
         Vector2 mouseChange = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
         mouseChange = Vector2.Scale(mouseChange, new Vector2(cameraScale, cameraScale));
