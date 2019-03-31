@@ -1,7 +1,6 @@
 ﻿/*
  * Controls player movement
  * 
- * Thanks to Holistic3d on YouTube for their tutorial
  */
 using System;
 using System.Collections;

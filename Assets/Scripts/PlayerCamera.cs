@@ -9,9 +9,10 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-
+    [Header("Camera settings")]
     public float cameraSensitivity = 5f;
     public float cameraSmoothing = 2f;
+    public float cameraFOV = 80f;
 
     float cameraScale;
 
@@ -22,8 +23,14 @@ public class PlayerCamera : MonoBehaviour
 
     void Start()
     {
-        cameraScale = cameraSensitivity * cameraSmoothing;
+        SetCameraScale(1.0f);
         playerTransform = this.transform.parent.gameObject.transform;
+        Camera.main.fieldOfView = cameraFOV;
+    }
+
+    public void SetCameraScale(float cameraSensitivityScale)
+    {
+        cameraScale = (cameraSensitivityScale * cameraSensitivity) * cameraSmoothing;
     }
 
     void Update()
