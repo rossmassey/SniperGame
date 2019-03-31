@@ -15,11 +15,9 @@ public class PlayerCamera : MonoBehaviour
     public float cameraFOV = 80f;
 
     float cameraScale;
-
+    Transform playerTransform;
     Vector2 mouseLook;
     Vector2 smoothVector;
-
-    Transform playerTransform;
 
     void Start()
     {

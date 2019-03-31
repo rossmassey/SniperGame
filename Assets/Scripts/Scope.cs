@@ -21,13 +21,12 @@ public class Scope : MonoBehaviour
 
     [Header("Editor strings")]
     public string zoomButton = "Fire2";
-    [Tooltip("Defined in animator")]
-    public string scopeAnimationBool = "isScoped";
+
 
     Animator animator;
-    PlayerCamera playerCamera;
     bool isScoped = false;
     float defaultFOV;
+    PlayerCamera playerCamera;
 
     private void Start()
     {
@@ -43,7 +42,7 @@ public class Scope : MonoBehaviour
         {
             // toggle scope animation
             isScoped = !isScoped;
-            animator.SetBool(scopeAnimationBool, isScoped);
+            animator.SetBool("isScoped", isScoped);
 
             // toggle overlay
             if (isScoped)

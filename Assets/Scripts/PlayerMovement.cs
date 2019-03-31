@@ -10,11 +10,13 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float playerSpeed = 15f;
+    public GameObject weaponHolder;
 
+    Animator weaponAnimator;
+    bool cursorLocked = true;
+    bool isMovementKeyPressed;
     CharacterController controller;
     Vector3 movement;
-    bool cursorLocked = true;
-
 
     void Start()
     {
@@ -22,11 +24,13 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         controller = GetComponent<CharacterController>();
+        weaponAnimator = weaponHolder.GetComponent<Animator>();
     }
 
     private void Update()
     {
         MovePlayer();
+        AnimateWeapon();
         UnlockCursor();
     }
 
@@ -55,5 +59,11 @@ public class PlayerMovement : MonoBehaviour
         movement = transform.TransformDirection(movement); // change vector from local to global space
 
         controller.SimpleMove(movement * playerSpeed);
+    }
+
+    private void AnimateWeapon()
+    {
+        isMovementKeyPressed = !(Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0);
+        weaponAnimator.SetBool("isMoving", isMovementKeyPressed);
     }
 }
