@@ -1,10 +1,18 @@
 # SniperGame
 
-A game where you snipe people
-
+A game set in the dystopian future where you are a resistance assasin. 
 
 ## Progress
 
-Made a simple rifle model. Need to add a scope and then add animations/script control.
+### 3/30
+Zooming in and out
+![Zoom](Assets/Resources/Images/zoom.GIF "zoom")
 
-![Sniper](Assets/Images/sniper.PNG "sniper")
+### 3/29
+Finished sniper
+![Sniper](Assets/Resources/Images/sniperFinished.PNG "sniper")
+
+### 3/28
+Made a simple rifle model. Need to add a scope and then add animations/script control.
+![Sniper](Assets/Resources/Images/sniper.PNG "sniper")
+
