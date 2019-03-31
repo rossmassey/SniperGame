@@ -6,7 +6,7 @@ A game set in the dystopian future where you are a resistance assasin.
 
 ### 3/30
 Zooming in and out
-![Zoom](Assets/Resources/Images/zoom.GIF "zoom")
+![Zoom](Assets/Resources/Images/zoom.gif "zoom")
 
 ### 3/29
 Finished sniper
