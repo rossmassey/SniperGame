@@ -1,6 +1,6 @@
 # SniperGame
 
-A game set in the dystopian future where you are a resistance assasin. 
+A game set in the dystopian future where you are a resistance assassin. 
 
 ## Progress
 
