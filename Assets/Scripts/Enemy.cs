@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
+    public string enemyName = "Enemy";
     public float maxHealth = 100.0f;
     float currentHealth;
 
