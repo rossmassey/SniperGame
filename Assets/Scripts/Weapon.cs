@@ -34,7 +34,7 @@ public class Weapon : MonoBehaviour
             Enemy enemy = hit.transform.GetComponent<Enemy>();
             if (enemy)
             {
-                Debug.Log(enemy.enemyName);
+                Debug.Log(enemy.enemyName + " hit!");
             }
         }
     }

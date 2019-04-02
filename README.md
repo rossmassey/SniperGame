@@ -16,3 +16,7 @@ Finished sniper
 Made a simple rifle model. Need to add a scope and then add animations/script control.
 ![Sniper](Assets/Resources/Images/sniper.PNG "sniper")
 
+## 4/1 
+Weapon raycasting
+![Fire](Assets/Resources/Images/fire.gif "fire")
+
