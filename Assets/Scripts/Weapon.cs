@@ -7,9 +7,10 @@ public class Weapon : MonoBehaviour
     public Camera mainCamera;
 
     public string weaponName;
-    public float damage;
+    public float weaponDamage;
     public int clipSize;
 
+    // TODO
     int currentClipAmount;
     int ammunition;
 
@@ -34,7 +35,8 @@ public class Weapon : MonoBehaviour
             Enemy enemy = hit.transform.GetComponent<Enemy>();
             if (enemy)
             {
-                Debug.Log(enemy.enemyName + " hit!");
+                enemy.DamageHealth(weaponDamage);
+                Debug.Log(enemy.HealthPercentage().ToString());
             }
         }
     }

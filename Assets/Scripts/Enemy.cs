@@ -5,12 +5,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public string enemyName = "Enemy";
-    public float maxHealth = 100.0f;
+    public float maxHealth = 100f;
+    public float cleanupDelay = 10f;
+
     float currentHealth;
+    Rigidbody rb;
 
     private void Start()
     {
         currentHealth = maxHealth;
+        rb = GetComponent<Rigidbody>();
     }
 
     public float HealthPercentage()
@@ -27,8 +31,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    /* 
+    public void AddForce(Vector3 origin, float forceAmount)
+    {
+        Vector3 forceDirection = transform.position - origin;
+        forceDirection = Vector3.Normalize(forceDirection);
+        rb.AddForce(forceDirection * forceAmount);
+        // TODO use ray to do AddForceAtPosition instead
+    }
+    */
+
     void Die()
     {
+
+        //yield return new WaitForSeconds(cleanupDelay);
         Destroy(gameObject);
     }
 

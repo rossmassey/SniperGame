@@ -1,10 +1,23 @@
 # SniperGame
 
-A game set in the dystopian future where you are a resistance assassin. 
+A game where you have a sniper rifle? Dystopian/post apocalyptic
+
+## Current TODO
+- muzzle flash
+- weapon sound effect
+- enemy AI (plan is navmesh agent + collision triggers)
 
 ## Progress
 
-## 4/1 
+### 4/6
+Learned how to make skyboxes!
+
+These are two I made
+
+(there is a unity asset called PanoramaToCubemap that is super helpful)
+![Skybox](Assets/Resources/Images/skyboxes.png "skybox")
+
+### 4/1 
 Weapon raycasting
 ![Fire](Assets/Resources/Images/fire.gif "fire")
 
