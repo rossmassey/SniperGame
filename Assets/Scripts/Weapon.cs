@@ -38,7 +38,7 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
-        StartCoroutine(MuzzleFlash());
+        
         gunShot.Play();
 
         Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
@@ -51,6 +51,9 @@ public class Weapon : MonoBehaviour
                 Debug.Log(enemy.HealthPercentage().ToString());
             }
         }
+
+        // flash muzzle after raycast to avoid collision
+        StartCoroutine(MuzzleFlash());
 
 
     }

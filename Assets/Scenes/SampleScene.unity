@@ -1578,6 +1578,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4778834717791992302, guid: 145651e2539c4544ab52f944bec61f08,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 3462267895237198727, guid: 145651e2539c4544ab52f944bec61f08,
         type: 3}
       propertyPath: m_Name
@@ -1643,6 +1648,16 @@ PrefabInstance:
       propertyPath: scopeOverlay
       value: 
       objectReference: {fileID: 1978452503}
+    - target: {fileID: 4861416719373956053, guid: 145651e2539c4544ab52f944bec61f08,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.138
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861416719373956053, guid: 145651e2539c4544ab52f944bec61f08,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.217
+      objectReference: {fileID: 0}
     - target: {fileID: 8896245641242948147, guid: 145651e2539c4544ab52f944bec61f08,
         type: 3}
       propertyPath: orthographic
