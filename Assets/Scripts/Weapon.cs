@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public Camera mainCamera;
+    Camera mainCamera;
 
+    [Header("Attributes")]
     public string weaponName;
     public float weaponDamage;
     public int clipSize;
+
+    [Header("Effects")]
+    public GameObject muzzleFlash;
+    public float flashTime = 0.1f;
+    public AudioSource gunShot;
+
+
 
     // TODO
     int currentClipAmount;
@@ -17,6 +25,7 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         mainCamera = Camera.main;
+        muzzleFlash.SetActive(false);
     }
 
     private void Update()
@@ -29,6 +38,9 @@ public class Weapon : MonoBehaviour
 
     public void Fire()
     {
+        StartCoroutine(MuzzleFlash());
+        gunShot.Play();
+
         Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
@@ -39,11 +51,15 @@ public class Weapon : MonoBehaviour
                 Debug.Log(enemy.HealthPercentage().ToString());
             }
         }
+
+
     }
 
-    void DamageEnemy(Enemy enemy)
+    IEnumerator MuzzleFlash()
     {
-
+        muzzleFlash.SetActive(true);
+        yield return new WaitForSeconds(flashTime);
+        muzzleFlash.SetActive(false);
     }
 
 }
