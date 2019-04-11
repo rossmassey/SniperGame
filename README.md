@@ -3,18 +3,21 @@
 A game where you have a sniper rifle? Dystopian/post apocalyptic
 
 ## Current TODO
-- muzzle flash
-- weapon sound effect
-- enemy AI (plan is navmesh agent + collision triggers)
+- add a model for the enemy
+- give enemies ability to move towards player
+- give enemies ability to attack player
 
 ## Progress
+
+### 4/11
+Added enemy pathing
+![Pathing](Assets/Resources/Images/pathing.gif "pathing")
 
 ### 4/6
 Learned how to make skyboxes!
 
-These are two I made
+These are some I made
 
-(there is a unity asset called PanoramaToCubemap that is super helpful)
 ![Skybox](Assets/Resources/Images/skyboxes.png "skybox")
 
 ### 4/1 

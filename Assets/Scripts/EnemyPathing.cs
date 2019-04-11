@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Simple waypoint system for enemies to follow
+/// </summary>
 public class EnemyPathing : MonoBehaviour
 {
 
@@ -15,13 +18,13 @@ public class EnemyPathing : MonoBehaviour
     int currentWaypoint = 0;
     float timeSinceArrival = 0;
 
-    private void Start()
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.destination = waypoints[0].transform.position;
     }
 
-    private void Update()
+    void Update()
     {
         WaitAndMove();
     }
@@ -37,13 +40,11 @@ public class EnemyPathing : MonoBehaviour
         if (timeSinceArrival >= waypointDelay)
         {
             SetWaypoint();
-            //Debug.Log("Moving to waypoint #" + currentWaypoint);
-            MoveToNextWaypoint();
             timeSinceArrival = 0;
         }
     }
 
-    void SetWaypoint()
+    private void SetWaypoint()
     {
         if (currentWaypoint == waypoints.Length - 1)
         {
@@ -52,16 +53,7 @@ public class EnemyPathing : MonoBehaviour
         else
         {
             currentWaypoint += 1;
-        }  
-    }
-
-    void MoveToNextWaypoint()
-    {
+        }
         agent.destination = waypoints[currentWaypoint].transform.position;
     }
-
-
-
-
-
 }

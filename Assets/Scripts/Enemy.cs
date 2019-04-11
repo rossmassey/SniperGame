@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     float currentHealth;
     Rigidbody rb;
 
-    private void Start()
+    void Start()
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody>();
@@ -41,10 +41,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Die()
+    private void Die()
     {
-
         Destroy(gameObject);
     }
-
 }

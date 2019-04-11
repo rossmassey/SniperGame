@@ -28,7 +28,7 @@ public class Scope : MonoBehaviour
     float defaultFOV;
     PlayerCamera playerCamera;
 
-    private void Start()
+    void Start()
     {
         animator = GetComponent<Animator>();
         scopeOverlay.SetActive(false);
@@ -36,7 +36,7 @@ public class Scope : MonoBehaviour
         defaultFOV = playerCamera.cameraFOV;
     }
 
-    private void Update()
+    void Update()
     {
         if (Input.GetButtonDown(zoomButton))
         {
@@ -56,7 +56,7 @@ public class Scope : MonoBehaviour
         }
     }
 
-    IEnumerator ToggleOverlayOn()
+    private IEnumerator ToggleOverlayOn()
     {
         yield return new WaitForSeconds(scopeDelay);
         scopeOverlay.SetActive(true);
@@ -65,7 +65,7 @@ public class Scope : MonoBehaviour
         playerCamera.SetCameraScale(scopedZoomScale);
     }
 
-    void ToggleOverlayOff()
+    private void ToggleOverlayOff()
     {
         scopeOverlay.SetActive(false);
         weaponCamera.gameObject.SetActive(true);

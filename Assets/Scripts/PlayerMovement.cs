@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         weaponAnimator = weaponHolder.GetComponent<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
         MovePlayer();
         AnimateWeapon();

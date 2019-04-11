@@ -24,6 +24,12 @@ public class PlayerCamera : MonoBehaviour
         Camera.main.fieldOfView = cameraFOV;
     }
 
+    void Update()
+    {
+        CalculateMouseLook();
+        ApplyTransforms();
+    }
+
     /// <summary>
     /// Changes the scale of the camera sensitivity (to be used when zooming in)
     /// </summary>
@@ -31,12 +37,6 @@ public class PlayerCamera : MonoBehaviour
     public void SetCameraScale(float cameraSensitivityScale)
     {
         cameraScale = (cameraSensitivityScale * cameraSensitivity) * cameraSmoothing;
-    }
-
-    void Update()
-    {
-        CalculateMouseLook();
-        ApplyTransforms();
     }
 
     private void ApplyTransforms()
