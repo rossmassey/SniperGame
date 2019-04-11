@@ -1,12 +1,11 @@
-﻿/*
- * Controls player movement
- * 
- */
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles player input related to movement, and moves the player
+/// </summary>
 public class PlayerMovement : MonoBehaviour
 {
     public float playerSpeed = 15f;

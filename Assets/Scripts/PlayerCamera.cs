@@ -1,12 +1,10 @@
-﻿/*
- * Controls player look
- * 
- * Thanks to Holistic3d on YouTube for their tutorial
- */
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controls camera with mouse
+/// </summary>
 public class PlayerCamera : MonoBehaviour
 {
     [Header("Camera settings")]
@@ -26,6 +24,10 @@ public class PlayerCamera : MonoBehaviour
         Camera.main.fieldOfView = cameraFOV;
     }
 
+    /// <summary>
+    /// Changes the scale of the camera sensitivity (to be used when zooming in)
+    /// </summary>
+    /// <param name="cameraSensitivityScale">Scale of camera sensitivty setting to use</param>
     public void SetCameraScale(float cameraSensitivityScale)
     {
         cameraScale = (cameraSensitivityScale * cameraSensitivity) * cameraSmoothing;

@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Base class for an enemy that has a finite amount of health
+/// </summary>
 public class Enemy : MonoBehaviour
 {
     public string enemyName = "Enemy";
     public float maxHealth = 100f;
-    public float cleanupDelay = 10f;
 
     float currentHealth;
     Rigidbody rb;
@@ -17,11 +19,19 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    /// <summary>
+    /// Get percentage of enemy health
+    /// </summary>
+    /// <returns>Health percent</returns>
     public float HealthPercentage()
     {
         return currentHealth / maxHealth;
     }
 
+    /// <summary>
+    /// Damage enemy health by certain amount 
+    /// </summary>
+    /// <param name="amount">How much damage to deal</param>
     public void DamageHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
@@ -31,20 +41,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    /* 
-    public void AddForce(Vector3 origin, float forceAmount)
-    {
-        Vector3 forceDirection = transform.position - origin;
-        forceDirection = Vector3.Normalize(forceDirection);
-        rb.AddForce(forceDirection * forceAmount);
-        // TODO use ray to do AddForceAtPosition instead
-    }
-    */
-
     void Die()
     {
 
-        //yield return new WaitForSeconds(cleanupDelay);
         Destroy(gameObject);
     }
 

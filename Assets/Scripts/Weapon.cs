@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Base class for a player weapon
+/// </summary>
 public class Weapon : MonoBehaviour
 {
     Camera mainCamera;
@@ -16,8 +19,6 @@ public class Weapon : MonoBehaviour
     public float flashTime = 0.1f;
     public AudioSource gunShot;
 
-
-
     // TODO
     int currentClipAmount;
     int ammunition;
@@ -30,17 +31,25 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
+        // TODO move to a player input class
         if (Input.GetMouseButtonDown(0))
         {
             Fire();
         }
     }
 
+    /// <summary>
+    /// Fires the weapon and raycast, damaging enemies
+    /// </summary>
     public void Fire()
     {
-        
         gunShot.Play();
+        RaycastWeapon();
+        StartCoroutine(MuzzleFlash());
+    }
 
+    private void RaycastWeapon()
+    {
         Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
@@ -48,14 +57,9 @@ public class Weapon : MonoBehaviour
             if (enemy)
             {
                 enemy.DamageHealth(weaponDamage);
-                Debug.Log(enemy.HealthPercentage().ToString());
+                Debug.Log(enemy.HealthPercentage().ToString()); // TODO remove this debug
             }
         }
-
-        // flash muzzle after raycast to avoid collision
-        StartCoroutine(MuzzleFlash());
-
-
     }
 
     IEnumerator MuzzleFlash()
