@@ -53,7 +53,7 @@ public class Weapon : MonoBehaviour
         Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            Enemy enemy = hit.transform.GetComponent<Enemy>();
+            Enemy enemy = hit.transform.GetComponentInParent<Enemy>();
             if (enemy)
             {
                 enemy.DamageHealth(weaponDamage);
