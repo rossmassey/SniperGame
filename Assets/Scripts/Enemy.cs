@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 /// <summary>
 /// Base class for an enemy that has a finite amount of health
@@ -11,12 +12,23 @@ public class Enemy : MonoBehaviour
     public float maxHealth = 100f;
 
     float currentHealth;
+    Animator animator;
+    NavMeshAgent navAgent;
     Rigidbody rb;
 
     void Start()
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody>();
+        navAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
+
+    }
+
+    private void Update()
+    {
+        // TODO allow enemy to walk and run based on "alert" state
+        AnimateMovement();
     }
 
     /// <summary>
@@ -39,6 +51,11 @@ public class Enemy : MonoBehaviour
         {
             Die();
         }
+    }
+
+    private void AnimateMovement()
+    {
+        animator.SetFloat("speedPercent", navAgent.velocity.magnitude / navAgent.speed);
     }
 
     private void Die()
