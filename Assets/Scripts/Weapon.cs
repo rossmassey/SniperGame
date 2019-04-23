@@ -56,8 +56,7 @@ public class Weapon : MonoBehaviour
             Enemy enemy = hit.transform.GetComponentInParent<Enemy>();
             if (enemy)
             {
-                enemy.DamageHealth(weaponDamage);
-                Debug.Log(enemy.HealthPercentage().ToString()); // TODO remove this debug
+                enemy.Damage(hit.transform.tag, weaponDamage);
             }
         }
     }

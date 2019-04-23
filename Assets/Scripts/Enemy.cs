@@ -22,7 +22,6 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
-
     }
 
     private void Update()
@@ -41,10 +40,25 @@ public class Enemy : MonoBehaviour
     }
 
     /// <summary>
-    /// Damage enemy health by certain amount 
+    /// Damage an enemy
     /// </summary>
-    /// <param name="amount">How much damage to deal</param>
-    public void DamageHealth(float amount)
+    /// <param name="tag">What part of enemy was hit</param>
+    /// <param name="weaponDamage">How much damage the weapon does</param>
+    public void Damage(string tag, float weaponDamage)
+    {
+        if (tag.Equals("Head"))
+        {
+            // headshot instant kill
+            DamageHealth(currentHealth);
+        }
+        else
+        {
+            DamageHealth(weaponDamage);
+        }
+    }
+
+
+    private void DamageHealth(float amount)
     {
         currentHealth = Mathf.Clamp(currentHealth - amount, 0, maxHealth);
         if (currentHealth == 0)
@@ -55,7 +69,8 @@ public class Enemy : MonoBehaviour
 
     private void AnimateMovement()
     {
-        animator.SetFloat("speedPercent", navAgent.velocity.magnitude / navAgent.speed);
+        float speedPercent = navAgent.velocity.magnitude / navAgent.speed;
+        animator.SetFloat("speedPercent", speedPercent, 0.1f, Time.deltaTime); // TODO create smooth variable
     }
 
     private void Die()
