@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
-/// Simple waypoint system for enemies to follow
+/// Two state pathing, following waypoints or a target
 /// </summary>
 public class EnemyPathing : MonoBehaviour
 {
@@ -14,18 +15,52 @@ public class EnemyPathing : MonoBehaviour
     private int currentWaypoint = 0;
     private float timeSinceArrival = 0;
 
+    private bool isAlerted = false;
+    private Vector3 targetLocation;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        // default to moving along waypoints, (IDLE)
         agent.destination = waypoints[0].transform.position;
     }
 
     private void Update()
     {
-        WaitAndMove();
+        if (isAlerted)
+        {
+            MoveTowardsTarget();
+        }
+        else
+        { 
+            MoveAlongWaypoints();
+        }
+        
     }
 
-    private void WaitAndMove()
+    public void SetAlert(bool alerted)
+    {
+        isAlerted = alerted;
+        if (alerted == false)
+        {
+            // return to last waypoint
+            agent.destination = waypoints[currentWaypoint].transform.position;
+        }
+    }
+
+    public void SetTarget(Vector3 newTarget)
+    {
+        targetLocation = newTarget;
+    }
+
+    private void MoveTowardsTarget()
+    {
+        agent.destination = targetLocation;
+        // TODO stop when within radius of target location
+        // TODO look (rotate) around when stopped
+    }
+
+    private void MoveAlongWaypoints()
     {
         // wait until agent arrives at destination
         if (Vector3.Distance(transform.position, waypoints[currentWaypoint].transform.position) < waypointMinDistance)

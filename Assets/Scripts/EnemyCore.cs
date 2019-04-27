@@ -4,7 +4,7 @@ using UnityEngine.AI;
 /// <summary>
 /// Base class for an enemy that has a finite amount of health
 /// </summary>
-public class Enemy : MonoBehaviour
+public class EnemyCore : MonoBehaviour
 {
     public string enemyName = "Enemy";
     public float maxHealth = 100f;
