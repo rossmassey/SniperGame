@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
@@ -11,12 +9,12 @@ public class Enemy : MonoBehaviour
     public string enemyName = "Enemy";
     public float maxHealth = 100f;
 
-    float currentHealth;
-    Animator animator;
-    NavMeshAgent navAgent;
-    Rigidbody rb;
+    private float currentHealth;
+    private Animator animator;
+    private NavMeshAgent navAgent;
+    private Rigidbody rb;
 
-    void Start()
+    private void Start()
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody>();
@@ -56,7 +54,6 @@ public class Enemy : MonoBehaviour
             DamageHealth(weaponDamage);
         }
     }
-
 
     private void DamageHealth(float amount)
     {

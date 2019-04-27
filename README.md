@@ -21,6 +21,11 @@ Learned how to animate in blender and imported to unity
 ### 4/17
 Made simple model for enemy
 
+<details><summary>View Image</summary>
+
+![Model](Assets/Resources/Images/enemy_model.PNG "model")
+</details>
+
 ### 4/11
 Added enemy pathing
 

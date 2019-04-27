@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Handles player input related to movement, and moves the player
@@ -11,13 +8,13 @@ public class PlayerMovement : MonoBehaviour
     public float playerSpeed = 15f;
     public GameObject weaponHolder;
 
-    Animator weaponAnimator;
-    bool cursorLocked = true;
-    bool isMovementKeyPressed;
-    CharacterController controller;
-    Vector3 movement;
+    private Animator weaponAnimator;
+    private bool cursorLocked = true;
+    private bool isMovementKeyPressed;
+    private CharacterController controller;
+    private Vector3 movement;
 
-    void Start()
+    private void Start()
     {
         // lock cursor to window and hide
         Cursor.lockState = CursorLockMode.Locked;
@@ -26,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
         weaponAnimator = weaponHolder.GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
         MovePlayer();
         AnimateWeapon();

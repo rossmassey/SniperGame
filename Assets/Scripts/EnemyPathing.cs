@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 /// <summary>
@@ -8,23 +6,21 @@ using UnityEngine.AI;
 /// </summary>
 public class EnemyPathing : MonoBehaviour
 {
-
     public GameObject[] waypoints;
     public float waypointDelay = 5f;
     public float waypointMinDistance = 2f;
 
-    NavMeshAgent agent;
+    private NavMeshAgent agent;
+    private int currentWaypoint = 0;
+    private float timeSinceArrival = 0;
 
-    int currentWaypoint = 0;
-    float timeSinceArrival = 0;
-
-    void Start()
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         agent.destination = waypoints[0].transform.position;
     }
 
-    void Update()
+    private void Update()
     {
         WaitAndMove();
     }
@@ -36,7 +32,7 @@ public class EnemyPathing : MonoBehaviour
         {
             timeSinceArrival += Time.deltaTime;
         }
-        
+
         if (timeSinceArrival >= waypointDelay)
         {
             SetWaypoint();

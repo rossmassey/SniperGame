@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Controls camera with mouse
@@ -12,19 +10,19 @@ public class PlayerCamera : MonoBehaviour
     public float cameraSmoothing = 2f;
     public float cameraFOV = 80f;
 
-    float cameraScale;
-    Transform playerTransform;
-    Vector2 mouseLook;
-    Vector2 smoothVector;
+    private float cameraScale;
+    private Transform playerTransform;
+    private Vector2 mouseLook;
+    private Vector2 smoothVector;
 
-    void Start()
+    private void Start()
     {
         SetCameraScale(1.0f);
         playerTransform = this.transform.parent.gameObject.transform;
         Camera.main.fieldOfView = cameraFOV;
     }
 
-    void Update()
+    private void Update()
     {
         CalculateMouseLook();
         ApplyTransforms();
@@ -56,4 +54,3 @@ public class PlayerCamera : MonoBehaviour
         mouseLook += smoothVector;
     }
 }
-

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -7,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class Weapon : MonoBehaviour
 {
-    Camera mainCamera;
+    private Camera mainCamera;
 
     [Header("Attributes")]
     public string weaponName;
@@ -20,8 +19,8 @@ public class Weapon : MonoBehaviour
     public AudioSource gunShot;
 
     // TODO
-    int currentClipAmount;
-    int ammunition;
+    private int currentClipAmount;
+    private int ammunition;
 
     private void Start()
     {
@@ -61,11 +60,10 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    IEnumerator MuzzleFlash()
+    private IEnumerator MuzzleFlash()
     {
         muzzleFlash.SetActive(true);
         yield return new WaitForSeconds(flashTime);
         muzzleFlash.SetActive(false);
     }
-
 }

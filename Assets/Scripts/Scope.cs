@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -23,12 +22,12 @@ public class Scope : MonoBehaviour
     [Header("Editor strings")]
     public string zoomButton = "Fire2";
 
-    Animator animator;
-    bool isScoped = false;
-    float defaultFOV;
-    PlayerCamera playerCamera;
+    private Animator animator;
+    private bool isScoped = false;
+    private float defaultFOV;
+    private PlayerCamera playerCamera;
 
-    void Start()
+    private void Start()
     {
         animator = GetComponent<Animator>();
         scopeOverlay.SetActive(false);
@@ -36,7 +35,7 @@ public class Scope : MonoBehaviour
         defaultFOV = playerCamera.cameraFOV;
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetButtonDown(zoomButton))
         {
