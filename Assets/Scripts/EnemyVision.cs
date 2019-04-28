@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 
-// TODO comment
-
+/// <summary>
+/// Determines if the enemy can see the player
+/// </summary>
 [RequireComponent(typeof(MeshCollider))]
 public class EnemyVision : MonoBehaviour
 {

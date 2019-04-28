@@ -33,7 +33,6 @@ public class EnemyPathing : MonoBehaviour
 
     private void Update()
     {
-        // TODO run when alerted, walk otherwise
         if (isAlerted)
         {
             MoveTowardsTarget();

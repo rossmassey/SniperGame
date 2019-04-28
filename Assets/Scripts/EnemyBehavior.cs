@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
-// TODO comment
+/// <summary>
+/// Enemy AI state machine
+/// </summary>
 public class EnemyBehavior : MonoBehaviour
 {
     /*
@@ -36,10 +38,10 @@ public class EnemyBehavior : MonoBehaviour
     public float engagingDelay = 2.0f;
     public float returnToIdleDelay = 20.0f;
 
-    public Color AlertColor;
-    public Color EngagingColor;
-    public Color SearchingColor;
-
+    [Header("Alert Bar colors")]
+    public Color alertColor;
+    public Color engagingColor;
+    public Color searchingColor;
 
     private enum State
     {
@@ -99,7 +101,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (canSeePlayer)
         {
-            alertBar.SetForegroundColor(AlertColor);
+            alertBar.SetForegroundColor(alertColor);
             alertBar.EnableAlertBar();
             alertTime = 0;
             currentState = State.ALERT;
@@ -116,7 +118,7 @@ public class EnemyBehavior : MonoBehaviour
             {
                 pathing.SetAlert(true);
                 pathing.SetTarget(vision.lastSightedPlayer.transform.position);
-                alertBar.SetForegroundColor(EngagingColor);
+                alertBar.SetForegroundColor(engagingColor);
                 currentState = State.ENGAGING;
                 return;
             }
@@ -144,7 +146,7 @@ public class EnemyBehavior : MonoBehaviour
         else
         {
             searchingTime = 0;
-            alertBar.SetForegroundColor(SearchingColor);
+            alertBar.SetForegroundColor(searchingColor);
             currentState = State.SEARCHING;
             return;
         }
@@ -155,7 +157,7 @@ public class EnemyBehavior : MonoBehaviour
         if (canSeePlayer)
         {
             alertBar.SetForegroundFill(1f);
-            alertBar.SetForegroundColor(EngagingColor);
+            alertBar.SetForegroundColor(engagingColor);
             currentState = State.ENGAGING;
             return;
         }
