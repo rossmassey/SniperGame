@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 // TODO comment
+
+[RequireComponent(typeof(MeshCollider))]
 public class EnemyVision : MonoBehaviour
 {
     [HideInInspector]
@@ -12,6 +14,7 @@ public class EnemyVision : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Player"))
         {
+            // TODO raycast towards player to check if player hidden behind cover
             canSeePlayer = true;
             lastSightedPlayer = other.gameObject;
         }
@@ -22,6 +25,14 @@ public class EnemyVision : MonoBehaviour
         if (other.gameObject.tag.Equals("Player"))
         {
             canSeePlayer = false;
+        }
+    }
+
+    private void Awake()
+    {
+        if (gameObject.layer != LayerMask.NameToLayer("Ignore Raycast"))
+        {
+            Debug.LogError("EnemyVision collider not in ignore raycast layer");
         }
     }
 }
