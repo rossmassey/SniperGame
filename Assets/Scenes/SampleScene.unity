@@ -337,7 +337,7 @@ GameObject:
   m_Layer: 0
   m_Name: waypoint (1)
   m_TagString: Untagged
-  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -367,7 +367,7 @@ GameObject:
   m_Layer: 0
   m_Name: waypoint
   m_TagString: Untagged
-  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -653,7 +653,7 @@ GameObject:
   m_Layer: 0
   m_Name: waypoint (3)
   m_TagString: Untagged
-  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1164,7 +1164,7 @@ GameObject:
   m_Layer: 0
   m_Name: waypoint (2)
   m_TagString: Untagged
-  m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1565,30 +1565,6 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[3]
       value: 
       objectReference: {fileID: 1090806884}
-    - target: {fileID: 352038572, guid: ce647c8931d18ef409eab4235d81bafe, type: 3}
-      propertyPath: m_Acceleration
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 1516647434, guid: ce647c8931d18ef409eab4235d81bafe, type: 3}
-      propertyPath: engagingDelay
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1516647434, guid: ce647c8931d18ef409eab4235d81bafe, type: 3}
-      propertyPath: returnToIdleDelay
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 311208918, guid: ce647c8931d18ef409eab4235d81bafe, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 8.373607
-      objectReference: {fileID: 0}
-    - target: {fileID: 311208918, guid: ce647c8931d18ef409eab4235d81bafe, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 7.715024
-      objectReference: {fileID: 0}
-    - target: {fileID: 311208917, guid: ce647c8931d18ef409eab4235d81bafe, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce647c8931d18ef409eab4235d81bafe, type: 3}
 --- !u!1001 &3128476695975631755

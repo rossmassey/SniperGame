@@ -3,37 +3,40 @@
 /// <summary>
 /// Determines if the enemy can see the player
 /// </summary>
-[RequireComponent(typeof(MeshCollider))]
+
 public class EnemyVision : MonoBehaviour
 {
-    [HideInInspector]
-    public bool canSeePlayer = false;
-    [HideInInspector]
-    public GameObject lastSightedPlayer;
+    public float enemyViewRadius = 0.5f;
+    public float enemyViewDistance = 25f;
 
-    private void OnTriggerEnter(Collider other)
+    public bool canSeePlayer;
+    public GameObject player;
+
+    private GameObject enemy;
+    private Vector3 lineToPlayer;
+    private float playerToEnemyRadius;
+    private float playerDistance;
+
+    private void Start()
     {
-        if (other.gameObject.tag.Equals("Player"))
-        {
-            // TODO raycast towards player to check if player hidden behind cover
-            canSeePlayer = true;
-            lastSightedPlayer = other.gameObject;
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
+        enemy = transform.parent.gameObject;
     }
 
-    private void OnTriggerExit(Collider other)
+    private void Update()
     {
-        if (other.gameObject.tag.Equals("Player"))
+        lineToPlayer = player.transform.position - enemy.transform.position;
+        playerToEnemyRadius = Vector3.Dot(enemy.transform.forward, lineToPlayer.normalized);
+        playerDistance = Vector3.Distance(player.transform.position, enemy.transform.position);
+
+
+        if (playerToEnemyRadius > enemyViewRadius && playerDistance < enemyViewDistance)
+        {
+            canSeePlayer = true;
+        }
+        else
         {
             canSeePlayer = false;
-        }
-    }
-
-    private void Awake()
-    {
-        if (gameObject.layer != LayerMask.NameToLayer("Ignore Raycast"))
-        {
-            Debug.LogError("EnemyVision collider not in ignore raycast layer");
         }
     }
 }

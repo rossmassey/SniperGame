@@ -48,6 +48,7 @@ public class EnemyAlertBar : MonoBehaviour
         backgroundImage.gameObject.SetActive(true);
     }
 
+    // LateUpdate is used to ensure this is done after player camera is moved
     private void LateUpdate()
     {
         // canvas always facing player
