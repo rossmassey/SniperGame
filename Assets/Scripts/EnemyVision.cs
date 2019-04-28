@@ -8,9 +8,10 @@ public class EnemyVision : MonoBehaviour
 {
     public float enemyViewRadius = 0.5f;
     public float enemyViewDistance = 25f;
+    public Vector3 playerHeightOffset = new Vector3(0, 2f, 0);
 
     public bool canSeePlayer;
-    public GameObject player;
+    public CapsuleCollider playerCollider;
 
     private GameObject enemy;
     private Vector3 lineToPlayer;
@@ -19,24 +20,37 @@ public class EnemyVision : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<CapsuleCollider>();
         enemy = transform.parent.gameObject;
     }
 
     private void Update()
     {
-        lineToPlayer = player.transform.position - enemy.transform.position;
+        lineToPlayer = (playerCollider.transform.position - playerHeightOffset) - enemy.transform.position;
         playerToEnemyRadius = Vector3.Dot(enemy.transform.forward, lineToPlayer.normalized);
-        playerDistance = Vector3.Distance(player.transform.position, enemy.transform.position);
-
+        playerDistance = Vector3.Distance(playerCollider.transform.position, enemy.transform.position);
 
         if (playerToEnemyRadius > enemyViewRadius && playerDistance < enemyViewDistance)
         {
-            canSeePlayer = true;
+            // draw ray from EnemyVision gameObject (located at head)
+            Ray ray = new Ray(transform.position, lineToPlayer);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                GameObject firstHit = hit.transform.gameObject;
+                if (firstHit.gameObject.tag.Equals("Player"))
+                {
+                    canSeePlayer = true;
+                }
+                else
+                {
+                    canSeePlayer = false;
+                }
+            }
         }
         else
         {
             canSeePlayer = false;
         }
+        
     }
 }

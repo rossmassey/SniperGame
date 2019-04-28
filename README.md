@@ -4,11 +4,20 @@ A game where you have a sniper rifle? Dystopian/post apocalyptic
 
 ## Current TODO
 
-- give enemies ability to move towards player
-- give enemies ability to attack player
+- make enemies attack player in engaging state
+- make enemies look (rotate) around when in searching state
+- make enemies detect player if within certain radius
+    - add footstep sounds for player
 
 ## Progress
 
+### 4/27
+Added enemy behavior state machine
+
+<details><summary>View Image</summary>
+
+![States](Assets/Resources/Images/enemy_states.gif "states")
+</details>
 
 ### 4/22
 Learned how to animate in blender and imported to unity

@@ -117,7 +117,7 @@ public class EnemyBehavior : MonoBehaviour
             if (alertTime >= engagingDelay)
             {
                 pathing.SetAlert(true);
-                pathing.SetTarget(vision.player.transform.position);
+                pathing.SetTarget(vision.playerCollider.transform.position);
                 alertBar.SetForegroundColor(engagingColor);
                 currentState = State.ENGAGING;
                 return;
@@ -141,7 +141,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (canSeePlayer)
         {
-            pathing.SetTarget(vision.player.transform.position);
+            pathing.SetTarget(vision.playerCollider.transform.position);
         }
         else
         {
