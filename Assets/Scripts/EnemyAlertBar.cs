@@ -65,7 +65,7 @@ public class EnemyAlertBar : MonoBehaviour
             }
     */
 
-    // TODO add OnValdate to all scripts
+    // TODO add Awake to all scripts
     private void Awake()
     {
         if (!foregroundImage || !backgroundImage)

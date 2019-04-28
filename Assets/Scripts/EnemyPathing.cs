@@ -7,22 +7,28 @@ using UnityEngine.AI;
 /// </summary>
 public class EnemyPathing : MonoBehaviour
 {
+    public float runningSpeed = 4f;
+    public float walkingSpeed = 2f;
+
     public GameObject[] waypoints;
     public float waypointDelay = 5f;
     public float waypointMinDistance = 2f;
 
-    private NavMeshAgent agent;
+    private NavMeshAgent navAgent;
     private int currentWaypoint = 0;
-    private float timeSinceArrival = 0;
+    private float timeSinceArrival = 0f;
+
+    private Animator animator;
 
     private bool isAlerted = false;
     private Vector3 targetLocation;
 
     private void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        // default to moving along waypoints, (IDLE)
-        agent.destination = waypoints[0].transform.position;
+        navAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
+        navAgent.destination = waypoints[0].transform.position;
+        navAgent.speed = walkingSpeed;
     }
 
     private void Update()
@@ -36,16 +42,29 @@ public class EnemyPathing : MonoBehaviour
         { 
             MoveAlongWaypoints();
         }
-        
+
+        AnimateMovement();
+    }
+
+    private void AnimateMovement()
+    {
+        float speedPercent = navAgent.velocity.magnitude / runningSpeed;
+        animator.SetFloat("speedPercent", speedPercent, 0.1f, Time.deltaTime); // TODO create smooth variable
     }
 
     public void SetAlert(bool alerted)
     {
-        isAlerted = alerted;
         if (alerted == false)
         {
             // return to last waypoint
-            agent.destination = waypoints[currentWaypoint].transform.position;
+            navAgent.destination = waypoints[currentWaypoint].transform.position;
+            navAgent.speed = walkingSpeed;
+            isAlerted = false;
+        }
+        else
+        {
+            isAlerted = true;
+            navAgent.speed = runningSpeed;
         }
     }
 
@@ -56,7 +75,7 @@ public class EnemyPathing : MonoBehaviour
 
     private void MoveTowardsTarget()
     {
-        agent.destination = targetLocation;
+        navAgent.destination = targetLocation;
         // TODO stop when within radius of target location
         // TODO look (rotate) around when stopped
     }
@@ -86,6 +105,6 @@ public class EnemyPathing : MonoBehaviour
         {
             currentWaypoint += 1;
         }
-        agent.destination = waypoints[currentWaypoint].transform.position;
+        navAgent.destination = waypoints[currentWaypoint].transform.position;
     }
 }

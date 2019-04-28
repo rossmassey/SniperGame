@@ -10,22 +10,12 @@ public class EnemyCore : MonoBehaviour
     public float maxHealth = 100f;
 
     private float currentHealth;
-    private Animator animator;
-    private NavMeshAgent navAgent;
     private Rigidbody rb;
 
     private void Start()
     {
         currentHealth = maxHealth;
         rb = GetComponent<Rigidbody>();
-        navAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponentInChildren<Animator>();
-    }
-
-    private void Update()
-    {
-        // TODO allow enemy to walk and run based on "alert" state
-        AnimateMovement();
     }
 
     /// <summary>
@@ -64,11 +54,7 @@ public class EnemyCore : MonoBehaviour
         }
     }
 
-    private void AnimateMovement()
-    {
-        float speedPercent = navAgent.velocity.magnitude / navAgent.speed;
-        animator.SetFloat("speedPercent", speedPercent, 0.1f, Time.deltaTime); // TODO create smooth variable
-    }
+
 
     private void Die()
     {
