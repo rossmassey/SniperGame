@@ -1,27 +1,34 @@
 ﻿using UnityEngine;
 
+// TODO comment
 public class EnemyBehavior : MonoBehaviour
 {
     /*
      *
      *      State Machine:
      *
-     *              IDLE ------(spot player)--------------------------> ALERT
+     *              IDLE -------(player enter vision)------------------> ALERT
      *
-     *              ALERT -----(player not exit vision in t seconds)--> ENGAGING
+     *              ALERT ------(player not exit vision in t seconds)--> ENGAGING
+     *              
+     *              ALERT ------(t returns to 0)-----------------------> IDLE
      *
-     *              ENGAGING --(player exit vision)-------------------> SEARCHING
+     *              ENGAGING ---(player exit vision)-------------------> SEARCHING
+     *              
+     *              SEARCHING --(player enter vision)------------------> ENGAGING
      *
-     *              SEARCHING -----(player not seen in x seconds)---------> IDLE
+     *              SEARCHING --(player not seen in x seconds)---------> IDLE
+     *              
+     *              t: engagingDelay
+     *              x: returnToIdleDelay
      *
-     *
-     *              EnemyPathing:
-     *              IDLE: movement to waypoints
-     *              ENGAGING: movement to target
-     *              ALERT: movement to targets last seen position
+     *              IDLE:       movement along waypoints
+     *              ALERT:      spotted target
+     *              ENGAGING:   movement to target
+     *              SEARCHING:  searching targets last seen position
      *
      *              This state machine is driven by EnemyVision, and manages
-     *              EnemyPathing.
+     *              EnemyPathing and EnemyAlertBar.
      *
      *
      */
@@ -29,16 +36,23 @@ public class EnemyBehavior : MonoBehaviour
     public float engagingDelay = 2.0f;
     public float returnToIdleDelay = 20.0f;
 
+    public Color AlertColor;
+    public Color EngagingColor;
+    public Color SearchingColor;
+
+
     private enum State
     {
         IDLE, ALERT, ENGAGING, SEARCHING
     }
 
+    private EnemyAlertBar alertBar;
+
     private EnemyPathing pathing;
 
     private EnemyVision vision;
-    private float timeSinceSpottedPlayer;
     private bool canSeePlayer;
+    private float timeSinceSpottedPlayer;
 
     private State currentState;
 
@@ -47,8 +61,10 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Start()
     {
-        vision = GetComponentInChildren<EnemyVision>();
+        alertBar = GetComponentInChildren<EnemyAlertBar>();
+        alertBar.DisableAlertBar();
         pathing = GetComponent<EnemyPathing>();
+        vision = GetComponentInChildren<EnemyVision>();
     }
 
     private void Update()
@@ -62,54 +78,32 @@ public class EnemyBehavior : MonoBehaviour
         switch (currentState)
         {
             case State.IDLE:
-                Debug.Log("IDLE");
                 ManageIdle();
                 break;
 
             case State.ALERT:
-                Debug.Log("ALERT");
                 ManageAlert();
                 break;
 
             case State.ENGAGING:
-                Debug.Log("ENGAGING");
                 ManageEngaging();
                 break;
 
             case State.SEARCHING:
-                Debug.Log("SEARCHING");
                 ManageSearching();
                 break;
         }
     }
 
-    private void ManageSearching()
+    private void ManageIdle()
     {
         if (canSeePlayer)
         {
-            currentState = State.ENGAGING;
-        }
-        else
-        {
-            searchingTime += Time.deltaTime;
-            if (searchingTime > returnToIdleDelay)
-            {
-                pathing.SetAlert(false);
-                currentState = State.IDLE;
-            }
-        }
-    }
-
-    private void ManageEngaging()
-    {
-        if (canSeePlayer)
-        {
-            pathing.SetTarget(vision.LastSightedPlayer.transform.position);
-        }
-        else
-        {
-            searchingTime = 0;
-            currentState = State.SEARCHING;
+            alertBar.SetForegroundColor(AlertColor);
+            alertBar.EnableAlertBar();
+            alertTime = 0;
+            currentState = State.ALERT;
+            return;
         }
     }
 
@@ -118,25 +112,65 @@ public class EnemyBehavior : MonoBehaviour
         if (canSeePlayer)
         {
             alertTime += Time.deltaTime;
-            if (alertTime > engagingDelay)
+            if (alertTime >= engagingDelay)
             {
                 pathing.SetAlert(true);
-                pathing.SetTarget(vision.LastSightedPlayer.transform.position);
+                pathing.SetTarget(vision.lastSightedPlayer.transform.position);
+                alertBar.SetForegroundColor(EngagingColor);
                 currentState = State.ENGAGING;
+                return;
             }
         }
         else
         {
-            currentState = State.IDLE;
+            alertTime -= Time.deltaTime;
+            if (alertTime <= 0)
+            {
+                alertBar.DisableAlertBar();
+                currentState = State.IDLE;
+                return;
+            }
         }
+        alertBar.SetForegroundFill(Mathf.Clamp(alertTime / engagingDelay, 0f, 1f));
+
     }
 
-    private void ManageIdle()
+    private void ManageEngaging()
     {
         if (canSeePlayer)
         {
-            alertTime = 0;
-            currentState = State.ALERT;
+            pathing.SetTarget(vision.lastSightedPlayer.transform.position);
+        }
+        else
+        {
+            searchingTime = 0;
+            alertBar.SetForegroundColor(SearchingColor);
+            currentState = State.SEARCHING;
+            return;
         }
     }
+
+    private void ManageSearching()
+    {
+        if (canSeePlayer)
+        {
+            alertBar.SetForegroundFill(1f);
+            alertBar.SetForegroundColor(EngagingColor);
+            currentState = State.ENGAGING;
+            return;
+        }
+        else
+        {
+            searchingTime += Time.deltaTime;
+            if (searchingTime > returnToIdleDelay)
+            {
+                alertBar.DisableAlertBar();
+                pathing.SetAlert(false);
+                currentState = State.IDLE;
+                return;
+            }
+        }
+        alertBar.SetForegroundFill(Mathf.Clamp(1 - searchingTime / returnToIdleDelay, 0f, 1f));
+    }
+
 }

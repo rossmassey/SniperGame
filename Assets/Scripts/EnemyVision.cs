@@ -1,20 +1,19 @@
 ﻿using UnityEngine;
 
+// TODO comment
 public class EnemyVision : MonoBehaviour
 {
     [HideInInspector]
     public bool canSeePlayer = false;
     [HideInInspector]
-    public GameObject LastSightedPlayer;
+    public GameObject lastSightedPlayer;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("Spotted player");
-
             canSeePlayer = true;
-            LastSightedPlayer = other.gameObject;
+            lastSightedPlayer = other.gameObject;
         }
     }
 
@@ -22,8 +21,6 @@ public class EnemyVision : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Player"))
         {
-            Debug.Log("Lost sight player");
-
             canSeePlayer = false;
         }
     }
