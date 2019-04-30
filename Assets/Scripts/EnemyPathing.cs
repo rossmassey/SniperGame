@@ -53,17 +53,20 @@ public class EnemyPathing : MonoBehaviour
 
     public void SetAlert(bool alerted)
     {
-        if (alerted == false)
+
+        if(alerted)
         {
-            // return to last waypoint
-            navAgent.destination = waypoints[currentWaypoint].transform.position;
-            navAgent.speed = walkingSpeed;
-            isAlerted = false;
+            isAlerted = true;
+            animator.SetBool("isLooking", true);
+            navAgent.speed = runningSpeed;
         }
         else
         {
-            isAlerted = true;
-            navAgent.speed = runningSpeed;
+            // return to last waypoint
+            navAgent.destination = waypoints[currentWaypoint].transform.position;
+            animator.SetBool("isLooking", false);
+            navAgent.speed = walkingSpeed;
+            isAlerted = false;
         }
     }
 

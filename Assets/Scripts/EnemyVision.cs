@@ -8,32 +8,49 @@ public class EnemyVision : MonoBehaviour
 {
     public float enemyViewRadius = 0.5f;
     public float enemyViewDistance = 25f;
-    public Vector3 playerHeightOffset = new Vector3(0, 2f, 0);
+    public float playerHeightOffset = 1f;
 
+    public GameObject enemyHead;
+    public GameObject player;
+    public GameObject enemy;
+
+    [HideInInspector]
     public bool canSeePlayer;
-    public CapsuleCollider playerCollider;
 
-    private GameObject enemy;
-    private Vector3 lineToPlayer;
-    private float playerToEnemyRadius;
+    private Vector3 playerDirectionFromEnemy;
+    private Vector3 playerHeight;
+    private float playerEnemyDotProduct;
     private float playerDistance;
 
     private void Start()
     {
-        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<CapsuleCollider>();
-        enemy = transform.parent.gameObject;
+        playerHeight = new Vector3(0, playerHeightOffset, 0);
     }
 
     private void Update()
     {
-        lineToPlayer = (playerCollider.transform.position - playerHeightOffset) - enemy.transform.position;
-        playerToEnemyRadius = Vector3.Dot(enemy.transform.forward, lineToPlayer.normalized);
-        playerDistance = Vector3.Distance(playerCollider.transform.position, enemy.transform.position);
+        CalculateVisionVectors();
+        CheckForPlayer();
+    }
 
-        if (playerToEnemyRadius > enemyViewRadius && playerDistance < enemyViewDistance)
+    private void CalculateVisionVectors()
+    {
+        // get heading
+        playerDirectionFromEnemy = player.transform.position - playerHeight - enemy.transform.position;
+
+        // get dot product
+        playerEnemyDotProduct = Vector3.Dot(-enemyHead.transform.forward, playerDirectionFromEnemy.normalized);
+
+        // get distane
+        playerDistance = Vector3.Distance(player.transform.position, enemy.transform.position);
+    }
+
+    private void CheckForPlayer()
+    {
+        if (playerEnemyDotProduct > enemyViewRadius && playerDistance < enemyViewDistance)
         {
-            // draw ray from EnemyVision gameObject (located at head)
-            Ray ray = new Ray(transform.position, lineToPlayer);
+            Ray ray = new Ray(enemyHead.transform.position, playerDirectionFromEnemy);
+            Debug.DrawRay(enemyHead.transform.position, playerDirectionFromEnemy);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 GameObject firstHit = hit.transform.gameObject;
@@ -51,6 +68,7 @@ public class EnemyVision : MonoBehaviour
         {
             canSeePlayer = false;
         }
-        
     }
+
+    
 }
